@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -11,14 +10,17 @@ import (
 )
 
 func UserRegister(router *gin.RouterGroup) {
-	router.POST("/sign-up", saveUser)
+	router.POST("/sign-up", signUp)
 }
 
-func saveUser(c *gin.Context) {
+func signUp(context *gin.Context) {
 	var signUpRequest model.SignUpModel
-	utility.GenericRequestJsonMapper(&signUpRequest, c)
-	fmt.Println(signUpRequest)
+	utility.GenericRequestJsonMapper(&signUpRequest, context)
 	var repo repository.Repo
-	repo.SignUp(signUpRequest.ID)
-	c.JSON(http.StatusOK, gin.H{"status": "User saves successfully."})
+	databaseResponse := repo.SignUp(signUpRequest.ID)
+	if databaseResponse != nil {
+		context.JSON(http.StatusOK, gin.H{"status": "Error guardando al usuario."})
+		return
+	}
+	context.JSON(http.StatusOK, gin.H{"status": "User saves successfully."})
 }
