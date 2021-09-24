@@ -19,7 +19,7 @@ func signUp(context *gin.Context) {
 	var repo repository.Repo
 	databaseResponse := repo.SignUp(signUpRequest.ID)
 	if databaseResponse != nil {
-		context.JSON(http.StatusOK, gin.H{"status": "Error guardando al usuario."})
+		context.JSON(http.StatusBadRequest, gin.H{"status": "Error guardando al usuario."})
 		return
 	}
 	context.JSON(http.StatusOK, gin.H{"status": "User saves successfully."})
