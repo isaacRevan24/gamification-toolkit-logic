@@ -5,12 +5,24 @@ import (
 	"github.com/isaacRevan24/gamification-toolkit-logic/repository"
 )
 
-type UserController struct {
+type UserControllerInterface interface {
+	SignUpController(request model.SignUpRequest) model.SignUpResponse
 }
 
-func (controller UserController) SignUpController(request model.SignUpRequest) model.SignUpResponse {
+type userController struct {
+}
 
-	var repo repository.Repo
+var (
+	repo *repository.Repo
+)
+
+func NewUserController() UserControllerInterface {
+	return &userController{}
+}
+
+func (*userController) SignUpController(request model.SignUpRequest) model.SignUpResponse {
+
+	repo, _ = repository.GetConnection()
 	var signUpResponse model.SignUpResponse
 	databaseResponse := repo.SignUp(request.ID)
 

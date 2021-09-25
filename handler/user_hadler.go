@@ -16,7 +16,7 @@ func UserRegister(router *gin.RouterGroup) {
 func signUp(context *gin.Context) {
 	var signUpRequest model.SignUpRequest
 	utility.GenericRequestJsonMapper(&signUpRequest, context)
-	var controller controller.UserController
+	var controller controller.UserControllerInterface = controller.NewUserController()
 	response := controller.SignUpController(signUpRequest)
 	context.JSON(getHttpStatusByCode(response.Code), response)
 }

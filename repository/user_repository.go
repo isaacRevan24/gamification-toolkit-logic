@@ -2,7 +2,7 @@ package repository
 
 func (r Repo) SignUp(userId string) error {
 
-	con, _ := getConnection()
+	con, _ := GetConnection()
 
 	_, err := con.db.Exec(`insert into client(client_id) values($1)`, userId)
 
