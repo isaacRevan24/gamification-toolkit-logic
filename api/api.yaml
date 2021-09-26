@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title: Transmit API REST
+  description: Endpoints to call service of BUSICAPA
+  version: 1.0.0
+servers:
+  - url: /v1
+    description: Base path
+paths:
+  /user/sign-up:
+    summary: Save in the database the user.
+    description: Save in the database the uuid sended from the gateway.
+    post:
+      operationId: SignUp
+      requestBody:
+        description: Body del request.
+        content:
+          "*/*":
+            schema:
+              $ref: "#/components/schemas/SignUpRequest"
+
+      responses:
+        "200":
+          description: Response de success del sign up.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignUpResponse"
+              example:
+                code: "CODE-000"
+                messge: "Success."
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUpResponse'
+              example:
+                Code: "CODE-001"
+                Message: "Bad request"
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUpResponse'
+              example:
+                code: "CODE-002"
+                messge: "Internal Error"
+
+components:
+  schemas:
+    SignUpRequest:
+      description: Objeto que contiene el request del servicio validate password.
+      type: object
+      properties:
+        ID:
+          type: string
+          description: Uuid unico del cliente.
+      required:
+        - ID
+    SignUpResponse:
+      description: Response object of the signup
+      type: object
+      properties:
+        Code:
+          type: string
+          description: Status code of response.
+        Message:
+          type: string
+          description: Custom message of response.
+      required:
+        - Code
+        - Message
