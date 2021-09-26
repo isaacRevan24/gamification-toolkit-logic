@@ -11,6 +11,6 @@ type SignUpRequest struct {
 }
 
 type SignUpResponse struct {
-	Code   string `json:"code"`
-	Status string `json:"status"`
+	Code    string `json:"code"`
+	Message string `json:"status"`
 }

@@ -9,8 +9,7 @@ type UserControllerInterface interface {
 	SignUpController(request model.SignUpRequest) model.SignUpResponse
 }
 
-type userController struct {
-}
+type userController struct{}
 
 var (
 	repo *repository.Repo
@@ -27,12 +26,12 @@ func (*userController) SignUpController(request model.SignUpRequest) model.SignU
 	databaseResponse := repo.SignUp(request.ID)
 
 	if databaseResponse != nil {
-		signUpResponse.Status = "Error saving the user"
+		signUpResponse.Message = "Error saving the user"
 		signUpResponse.Code = model.BAD_REQUEST_ERROR_STATUS
 		return signUpResponse
 	}
 
-	signUpResponse.Status = "Successfully saved user."
+	signUpResponse.Message = "Successfully saved user."
 	signUpResponse.Code = model.SUCCESS_CODE_STATUS
 	return signUpResponse
 }
