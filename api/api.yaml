@@ -1,0 +1,183 @@
+openapi: 3.0.3
+info:
+  title: Transmit API REST
+  description: Endpoints to call service of BUSICAPA
+  version: 1.0.0
+
+servers:
+  - url: /v1
+    description: Base path
+
+paths:
+  /habit/new:
+    summary: Add a new habit to the user.
+    post:
+      operationId: AddNewHabit
+      requestBody:
+        description: Body del request.
+        content:
+          "*/*":
+            schema:
+              $ref: "#/components/schemas/AddNewHabitRequest"
+
+      responses:
+        "200":
+          description: Success message from add new habbit.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddNewHabitResponse"
+              example:
+                status:
+                  code: "CODE-00"
+                  messge: "Success."
+                habbit-id: 99
+                
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddNewHabitResponse'
+              example:
+                status:
+                  code: "CODE-01"
+                  Message: "Bad request"
+                habbit-id: 0
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddNewHabitResponse'
+              example:
+                status:
+                  code: "CODE-02"
+                  messge: "Internal Error"
+                habbit-id: 1
+    
+
+  /user/sign-up:
+    summary: Save in the database the user.
+    description: Save in the database the uuid sended from the gateway.
+    post:
+      operationId: SignUp
+      requestBody:
+        description: Body del request.
+        content:
+          "*/*":
+            schema:
+              $ref: "#/components/schemas/SignUpRequest"
+      responses:
+        "200":
+          description: Response de success del sign up.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignUpResponse"
+              example:
+                status:
+                  code: "CODE-00"
+                  messge: "Success."
+                
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUpResponse'
+              example:
+                status:
+                  code: "CODE-01"
+                  Message: "Bad request"
+
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUpResponse'
+              example:
+                status:
+                  code: "CODE-02"
+                  messge: "Internal Error"
+
+components:
+  schemas:
+    SignUpRequest:
+      description: Objeto que contiene el request del servicio validate password.
+      type: object
+      properties:
+        id:
+          type: string
+          description: Uuid unico del cliente.
+      required:
+        - id
+      example:
+        id: "jflasjflknflksjdf"
+
+    SignUpResponse:
+      description: Response object of the signup
+      type: object
+      properties:
+        status: 
+          $ref: '#/components/schemas/StatusResponse'
+
+    AddNewHabitRequest:
+      description: New habbit request object.
+      type: object
+      properties:
+        user-id:
+          type: string
+          description: Uuid of the user.
+        name:
+          type: string
+          description: Name of the new habbit.
+        description:
+          type: string
+          description: Description of the habbit
+        condition:
+          type: string
+          description: Condición de status D - daily, W - weekly, Y - yearly
+          enum:
+            - D
+            - W
+            - Y
+        repetition:
+          type: integer
+          description: Ammount of repetition in the condition of the habit
+      required:
+        - user-id
+        - name
+        - condition
+        - repetition
+      example:
+        user-id: testId1
+        name: running
+        description: run every day
+        condition: D
+        repetition: 1
+    
+    AddNewHabitResponse:
+      description: Response from adding new habit.
+      type: object
+      properties:
+        status: 
+          $ref: '#/components/schemas/StatusResponse'
+        habit-id:
+          type: integer
+          description: Habbit id.
+
+    StatusResponse:
+      description: Generic status response.
+      type: object
+      properties:
+        Code:
+          type: string
+          description: Status code of response.
+        Message:
+          type: string
+          description: Custom message of response.
+      required:
+        - Code
+        - Message
