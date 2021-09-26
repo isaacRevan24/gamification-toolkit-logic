@@ -1,9 +1,13 @@
 package controller
 
-import "github.com/isaacRevan24/gamification-toolkit-logic/model"
+import (
+	"github.com/isaacRevan24/gamification-toolkit-logic/model"
+	"github.com/isaacRevan24/gamification-toolkit-logic/repository"
+)
 
-func (*userController) AddNewHabitController(reques model.AddNewHabitRequest) model.AddNewHabitResponse {
+func (*habitController) AddNewHabitController(reques model.AddNewHabitRequest) model.AddNewHabitResponse {
 
+	repo, _ = repository.GetConnection()
 	var response model.AddNewHabitResponse
 	response.Status.Code = model.SUCCESS_CODE_STATUS
 	response.Status.Message = "New habit created"

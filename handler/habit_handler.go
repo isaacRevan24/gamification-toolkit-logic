@@ -20,7 +20,7 @@ func addHabit(context *gin.Context) {
 
 		return
 	}
-	var controller controller.UserControllerInterface = controller.NewUserController()
+	var controller controller.HabitControllerInterface = controller.NewHabitController()
 	response := controller.AddNewHabitController(addNewHabitRequest)
 	context.JSON(getHttpStatusByCode(response.Status.Code), response)
 }

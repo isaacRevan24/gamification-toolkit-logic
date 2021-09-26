@@ -7,10 +7,14 @@ import (
 
 type UserControllerInterface interface {
 	SignUpController(request model.SignUpRequest) model.SignUpResponse
+}
+type HabitControllerInterface interface {
 	AddNewHabitController(reques model.AddNewHabitRequest) model.AddNewHabitResponse
 }
 
 type userController struct{}
+
+type habitController struct{}
 
 var (
 	repo *repository.Repo
@@ -18,4 +22,8 @@ var (
 
 func NewUserController() UserControllerInterface {
 	return &userController{}
+}
+
+func NewHabitController() HabitControllerInterface {
+	return &habitController{}
 }
