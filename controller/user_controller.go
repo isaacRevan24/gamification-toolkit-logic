@@ -7,6 +7,7 @@ import (
 
 type UserControllerInterface interface {
 	SignUpController(request model.SignUpRequest) model.SignUpResponse
+	AddNewHabitController(reques model.AddNewHabitRequest) model.AddNewHabitResponse
 }
 
 type userController struct{}
@@ -34,4 +35,13 @@ func (*userController) SignUpController(request model.SignUpRequest) model.SignU
 	signUpResponse.Status.Message = "Successfully saved user."
 	signUpResponse.Status.Code = model.SUCCESS_CODE_STATUS
 	return signUpResponse
+}
+
+func (*userController) AddNewHabitController(reques model.AddNewHabitRequest) model.AddNewHabitResponse {
+
+	var response model.AddNewHabitResponse
+	response.Status.Code = model.SUCCESS_CODE_STATUS
+	response.Status.Message = "New habit created"
+
+	return response
 }
