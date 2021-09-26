@@ -9,7 +9,10 @@ import (
 
 func UserRegister(router *gin.RouterGroup) {
 	router.POST("/sign-up", signUp)
-	router.POST("/habit", addHabit)
+}
+
+func HabitRegister(router *gin.RouterGroup) {
+	router.POST("/new", addHabit)
 }
 
 func getHttpStatusByCode(code string) int {
