@@ -17,7 +17,5 @@ func (r Repo) AddNewHabit(userId string, name string, description string, condit
 		return 0, err
 	}
 
-	fmt.Println(habitId)
-
 	return habitId, nil
 }

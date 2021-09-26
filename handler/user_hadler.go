@@ -12,11 +12,11 @@ import (
 
 func signUp(context *gin.Context) {
 	var signUpRequest model.SignUpRequest
-	mapping := utility.GenericRequestJsonMapper(&signUpRequest, context)
-	if mapping != nil {
+	err := utility.GenericRequestJsonMapper(&signUpRequest, context)
+	if err != nil {
 		// TODO: hacer paquete de logs
 		var Error = log.New(os.Stdout, "\u001b[31mERROR: \u001b[0m", log.LstdFlags|log.Lshortfile)
-		Error.Println(mapping)
+		Error.Println(err)
 		return
 	}
 	var controller controller.UserControllerInterface = controller.NewUserController()

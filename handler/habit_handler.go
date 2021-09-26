@@ -12,11 +12,11 @@ import (
 
 func addHabit(context *gin.Context) {
 	var addNewHabitRequest model.AddNewHabitRequest
-	mapping := utility.GenericRequestJsonMapper(&addNewHabitRequest, context)
-	if mapping != nil {
+	err := utility.GenericRequestJsonMapper(&addNewHabitRequest, context)
+	if err != nil {
 		// TODO: hacer paquete de logs
 		var Error = log.New(os.Stdout, "\u001b[31mERROR: \u001b[0m", log.LstdFlags|log.Lshortfile)
-		Error.Println(mapping)
+		Error.Println(err)
 
 		return
 	}
