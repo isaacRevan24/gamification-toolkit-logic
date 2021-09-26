@@ -11,6 +11,7 @@ func UserRegister(router *gin.RouterGroup) {
 	router.POST("/sign-up", signUp)
 	router.POST("/habit", addHabit)
 }
+
 func getHttpStatusByCode(code string) int {
 	switch code {
 	case model.SUCCESS_CODE_STATUS:

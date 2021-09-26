@@ -5,6 +5,10 @@ import (
 	"github.com/isaacRevan24/gamification-toolkit-logic/repository"
 )
 
+var (
+	repo *repository.Repo
+)
+
 type UserControllerInterface interface {
 	SignUpController(request model.SignUpRequest) model.SignUpResponse
 }
@@ -15,10 +19,6 @@ type HabitControllerInterface interface {
 type userController struct{}
 
 type habitController struct{}
-
-var (
-	repo *repository.Repo
-)
 
 func NewUserController() UserControllerInterface {
 	return &userController{}

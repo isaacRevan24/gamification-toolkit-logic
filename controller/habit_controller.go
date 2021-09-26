@@ -9,6 +9,7 @@ func (*habitController) AddNewHabitController(reques model.AddNewHabitRequest) m
 
 	repo, _ = repository.GetConnection()
 	var response model.AddNewHabitResponse
+	repo.AddNewHabit("testUserid1", "new", "a", "Y", 2)
 	response.Status.Code = model.SUCCESS_CODE_STATUS
 	response.Status.Message = "New habit created"
 
