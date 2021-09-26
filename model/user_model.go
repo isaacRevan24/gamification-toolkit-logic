@@ -11,6 +11,20 @@ type SignUpRequest struct {
 }
 
 type SignUpResponse struct {
+	Status StatusResponse `json:"status"`
+}
+
+type AddNewHabitRequest struct {
+	Name        string `json:"name" binding:"required"`
+	Description string `json:"description"`
+	Condition   string `json:"condition" binding:"required"`
+	Repetition  string `json:"Repetition" binding:"required"`
+}
+
+type AddNewHabitResponse struct {
+}
+
+type StatusResponse struct {
 	Code    string `json:"code"`
-	Message string `json:"status"`
+	Message string `json:"message"`
 }

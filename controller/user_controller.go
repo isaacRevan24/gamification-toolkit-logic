@@ -26,12 +26,12 @@ func (*userController) SignUpController(request model.SignUpRequest) model.SignU
 	databaseResponse := repo.SignUp(request.ID)
 
 	if databaseResponse != nil {
-		signUpResponse.Message = "Error saving the user"
-		signUpResponse.Code = model.BAD_REQUEST_ERROR_STATUS
+		signUpResponse.Status.Message = "Error saving the user"
+		signUpResponse.Status.Code = model.BAD_REQUEST_ERROR_STATUS
 		return signUpResponse
 	}
 
-	signUpResponse.Message = "Successfully saved user."
-	signUpResponse.Code = model.SUCCESS_CODE_STATUS
+	signUpResponse.Status.Message = "Successfully saved user."
+	signUpResponse.Status.Code = model.SUCCESS_CODE_STATUS
 	return signUpResponse
 }

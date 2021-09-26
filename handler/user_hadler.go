@@ -18,7 +18,11 @@ func signUp(context *gin.Context) {
 	utility.GenericRequestJsonMapper(&signUpRequest, context)
 	var controller controller.UserControllerInterface = controller.NewUserController()
 	response := controller.SignUpController(signUpRequest)
-	context.JSON(getHttpStatusByCode(response.Code), response)
+	context.JSON(getHttpStatusByCode(response.Status.Code), response)
+}
+
+func addHabit(context *gin.Context) {
+
 }
 
 func getHttpStatusByCode(code string) int {
