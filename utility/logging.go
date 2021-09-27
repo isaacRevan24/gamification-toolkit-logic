@@ -1,7 +1,10 @@
 package utility
 
 import (
+	"os"
+
 	log "github.com/sirupsen/logrus"
+	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 )
 
 type LoggingInterface interface {
@@ -14,9 +17,15 @@ type LoggingInterface interface {
 type Logging struct{}
 
 func NewLogging() LoggingInterface {
-	Formatter := new(log.TextFormatter)
-	Formatter.TimestampFormat = "02-01-2006 15:04:05"
-	Formatter.FullTimestamp = true
+
+	log.SetOutput(os.Stderr)
+	log.SetFormatter(&prefixed.TextFormatter{
+		DisableColors:   true,
+		TimestampFormat: "2006-01-02 15:04:05",
+		FullTimestamp:   true,
+		ForceFormatting: true,
+	})
+
 	return &Logging{}
 }
 

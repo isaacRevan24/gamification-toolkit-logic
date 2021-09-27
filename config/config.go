@@ -18,4 +18,5 @@ func loggingSetup() {
 	handler.Logs = logs
 	controller.Logs = logs
 	repository.Logs = logs
+	logs.LogInfo("Global logs setup done.")
 }
