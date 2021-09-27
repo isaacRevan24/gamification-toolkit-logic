@@ -12,6 +12,7 @@ func (r Repo) AddNewHabitRepository(userId string, name string, description stri
 
 	if err != nil {
 		Logs.LogError(err)
+		Logs.LogDebug("End " + functionName)
 		return 0, err
 	}
 

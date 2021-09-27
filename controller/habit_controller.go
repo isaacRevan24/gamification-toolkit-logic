@@ -17,7 +17,6 @@ func (*habitController) AddNewHabitController(reques model.AddNewHabitRequest) m
 		response.Status.Code = model.BAD_REQUEST_ERROR_STATUS
 		response.Status.Message = "Error creating new habit."
 
-		Logs.LogError(err)
 		Logs.LogDebug("End " + functionName)
 		return response
 	}

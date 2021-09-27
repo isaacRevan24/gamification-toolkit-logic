@@ -17,7 +17,6 @@ func (*userController) SignUpController(request model.SignUpRequest) model.SignU
 		signUpResponse.Status.Message = "Error saving the user"
 		signUpResponse.Status.Code = model.BAD_REQUEST_ERROR_STATUS
 
-		Logs.LogError(err)
 		Logs.LogDebug("End " + functionName)
 		return signUpResponse
 	}

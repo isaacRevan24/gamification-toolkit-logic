@@ -10,7 +10,7 @@ import (
 type LoggingInterface interface {
 	LogError(err error)
 	LogInfo(message string)
-	LogDebug(message interface{})
+	LogDebug(message string)
 	LogWarning(message interface{})
 }
 
@@ -37,7 +37,8 @@ func (*Logging) LogInfo(message string) {
 	log.Info(message)
 }
 
-func (*Logging) LogDebug(message interface{}) {
+func (*Logging) LogDebug(message string) {
+	log.SetLevel(log.DebugLevel)
 	log.Debug(message)
 }
 
