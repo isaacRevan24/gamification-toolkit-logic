@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/isaacRevan24/gamification-toolkit-logic/config"
 	"github.com/isaacRevan24/gamification-toolkit-logic/handler"
 )
 
@@ -9,7 +10,7 @@ func main() {
 
 	r := gin.Default()
 
-	// TODO: sertup global logging
+	config.RunConfigs()
 
 	v1 := r.Group("/v1")
 
