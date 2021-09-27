@@ -5,6 +5,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaacRevan24/gamification-toolkit-logic/model"
+	"github.com/isaacRevan24/gamification-toolkit-logic/utility"
+)
+
+var (
+	Logs utility.LoggingInterface
 )
 
 func UserRegister(router *gin.RouterGroup) {

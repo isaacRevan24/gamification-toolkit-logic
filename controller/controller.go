@@ -3,10 +3,12 @@ package controller
 import (
 	"github.com/isaacRevan24/gamification-toolkit-logic/model"
 	"github.com/isaacRevan24/gamification-toolkit-logic/repository"
+	"github.com/isaacRevan24/gamification-toolkit-logic/utility"
 )
 
 var (
 	repo *repository.Repo
+	Logs utility.LoggingInterface = utility.NewLogging()
 )
 
 type UserControllerInterface interface {

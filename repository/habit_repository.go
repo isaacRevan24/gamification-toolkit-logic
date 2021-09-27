@@ -1,10 +1,8 @@
 package repository
 
-import (
-	"fmt"
-)
-
-func (r Repo) AddNewHabit(userId string, name string, description string, condition string, repetition int) (int, error) {
+func (r Repo) AddNewHabitRepository(userId string, name string, description string, condition string, repetition int) (int, error) {
+	const functionName string = "AddNewHabitRepository"
+	Logs.LogDebug("Start " + functionName)
 
 	habitId := 0
 
@@ -13,9 +11,12 @@ func (r Repo) AddNewHabit(userId string, name string, description string, condit
 	err := r.db.QueryRow(sqlStatemente, userId, name, description, condition, repetition).Scan(&habitId)
 
 	if err != nil {
-		fmt.Println(err)
+		Logs.LogError(err)
+		Logs.LogDebug("End " + functionName)
 		return 0, err
 	}
+
+	Logs.LogDebug("End " + functionName)
 
 	return habitId, nil
 }

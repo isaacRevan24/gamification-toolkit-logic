@@ -5,12 +5,13 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/isaacRevan24/gamification-toolkit-logic/utility"
 	_ "github.com/lib/pq"
 )
 
-type Repo struct {
-	db *sql.DB
-}
+var (
+	Logs utility.LoggingInterface
+)
 
 const (
 	host     = "localhost"
@@ -19,6 +20,10 @@ const (
 	password = "password"
 	dbname   = "gamify"
 )
+
+type Repo struct {
+	db *sql.DB
+}
 
 func GetConnection() (*Repo, error) {
 

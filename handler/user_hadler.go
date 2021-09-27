@@ -1,8 +1,7 @@
 package handler
 
 import (
-	"log"
-	"os"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaacRevan24/gamification-toolkit-logic/controller"
@@ -11,15 +10,21 @@ import (
 )
 
 func signUp(context *gin.Context) {
+	const functionName string = "signUp"
+	Logs.LogDebug("Start " + functionName)
+
 	var signUpRequest model.SignUpRequest
 	err := utility.GenericRequestJsonMapper(&signUpRequest, context)
+
 	if err != nil {
-		// TODO: hacer paquete de logs
-		var Error = log.New(os.Stdout, "\u001b[31mERROR: \u001b[0m", log.LstdFlags|log.Lshortfile)
-		Error.Println(err)
+		Logs.LogError(err)
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Missing arguments."})
 		return
 	}
+
 	var controller controller.UserControllerInterface = controller.NewUserController()
 	response := controller.SignUpController(signUpRequest)
+
+	Logs.LogDebug("End " + functionName)
 	context.JSON(getHttpStatusByCode(response.Status.Code), response)
 }

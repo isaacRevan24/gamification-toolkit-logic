@@ -1,8 +1,7 @@
 package handler
 
 import (
-	"log"
-	"os"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/isaacRevan24/gamification-toolkit-logic/controller"
@@ -11,16 +10,20 @@ import (
 )
 
 func addHabit(context *gin.Context) {
+	const functionName string = "addHabit"
+	Logs.LogDebug("Start " + functionName)
+
 	var addNewHabitRequest model.AddNewHabitRequest
 	err := utility.GenericRequestJsonMapper(&addNewHabitRequest, context)
 	if err != nil {
-		// TODO: hacer paquete de logs
-		var Error = log.New(os.Stdout, "\u001b[31mERROR: \u001b[0m", log.LstdFlags|log.Lshortfile)
-		Error.Println(err)
-
+		Logs.LogError(err)
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Missing arguments."})
 		return
 	}
+
 	var controller controller.HabitControllerInterface = controller.NewHabitController()
 	response := controller.AddNewHabitController(addNewHabitRequest)
+
+	Logs.LogDebug("End " + functionName)
 	context.JSON(getHttpStatusByCode(response.Status.Code), response)
 }
