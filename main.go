@@ -9,6 +9,8 @@ func main() {
 
 	r := gin.Default()
 
+	// TODO: sertup global logging
+
 	v1 := r.Group("/v1")
 
 	handler.UserRegister(v1.Group("/user"))

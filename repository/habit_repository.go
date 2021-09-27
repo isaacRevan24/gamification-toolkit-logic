@@ -1,9 +1,5 @@
 package repository
 
-import (
-	"fmt"
-)
-
 func (r Repo) AddNewHabit(userId string, name string, description string, condition string, repetition int) (int, error) {
 
 	habitId := 0
@@ -13,7 +9,6 @@ func (r Repo) AddNewHabit(userId string, name string, description string, condit
 	err := r.db.QueryRow(sqlStatemente, userId, name, description, condition, repetition).Scan(&habitId)
 
 	if err != nil {
-		fmt.Println(err)
 		return 0, err
 	}
 
