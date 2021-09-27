@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/isaacRevan24/gamification-toolkit-logic/controller"
 	"github.com/isaacRevan24/gamification-toolkit-logic/model"
@@ -16,6 +18,7 @@ func signUp(context *gin.Context) {
 
 	if err != nil {
 		Logs.LogError(err)
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Missing arguments."})
 		return
 	}
 
