@@ -7,10 +7,12 @@ import (
 	"github.com/isaacRevan24/gamification-toolkit-logic/utility"
 )
 
+// Run required configs at start of the application.
 func RunConfigs() {
 	loggingSetup()
 }
 
+// Initialize logging config for all clases that needed.
 func loggingSetup() {
 	logs := utility.NewLogging()
 	handler.Logs = logs
