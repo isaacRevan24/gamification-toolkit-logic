@@ -8,7 +8,7 @@ import (
 
 var (
 	repo *repository.Repo
-	Logs utility.LoggingInterface
+	Logs utility.LoggingInterface = utility.NewLogging()
 )
 
 type UserControllerInterface interface {
