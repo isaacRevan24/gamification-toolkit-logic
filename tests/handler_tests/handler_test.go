@@ -1,4 +1,4 @@
-package handlertest
+package handlertests
 
 import (
 	"testing"
