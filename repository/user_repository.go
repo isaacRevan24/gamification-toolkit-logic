@@ -8,6 +8,8 @@ func (r Repo) SignUpRepository(userId string) error {
 
 	if err != nil {
 		Logs.LogError(err)
+		Logs.LogDebug("End " + functionName)
+
 		return err
 	}
 
