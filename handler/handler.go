@@ -10,7 +10,8 @@ import (
 )
 
 var (
-	Logs utility.LoggingInterface
+	mapper utility.GamificationMapper = utility.NewGamificationMapper()
+	Logs   utility.LoggingInterface
 )
 
 type UserHandlerInterface interface {
