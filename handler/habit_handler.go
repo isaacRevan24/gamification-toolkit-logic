@@ -6,7 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/isaacRevan24/gamification-toolkit-logic/controller"
 	"github.com/isaacRevan24/gamification-toolkit-logic/model"
-	"github.com/isaacRevan24/gamification-toolkit-logic/utility"
 )
 
 func addHabit(context *gin.Context) {
@@ -14,7 +13,7 @@ func addHabit(context *gin.Context) {
 	Logs.LogDebug("Start " + functionName)
 
 	var addNewHabitRequest model.AddNewHabitRequest
-	err := utility.GenericRequestJsonMapper(&addNewHabitRequest, context)
+	err := mapper.GenericRequestJsonMapper(&addNewHabitRequest, context)
 	if err != nil {
 		Logs.LogError(err)
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Missing arguments."})
