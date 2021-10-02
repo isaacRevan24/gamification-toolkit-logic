@@ -8,7 +8,7 @@ import (
 	"github.com/isaacRevan24/gamification-toolkit-logic/model"
 )
 
-func signUp(context *gin.Context) {
+func (*userHandler) SignUp(context *gin.Context) {
 	const functionName string = "signUp"
 	Logs.LogDebug("Start " + functionName)
 

@@ -3,12 +3,11 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/isaacRevan24/gamification-toolkit-logic/config"
-	"github.com/isaacRevan24/gamification-toolkit-logic/handler"
+	"github.com/isaacRevan24/gamification-toolkit-logic/router"
 )
 
 var (
-	userHandler  handler.UserHandlerInterface  = handler.NewUserHandler()
-	habitHandler handler.HabitHandlerInterface = handler.NewHabitHandler()
+	gamificationRouter router.RouterRegistersInterface = router.NewHandlerRegisters()
 )
 
 func main() {
@@ -19,8 +18,8 @@ func main() {
 
 	v1 := r.Group("/v1")
 
-	userHandler.UserRegister(v1.Group("/user"))
-	habitHandler.HabitRegister(v1.Group("/habit"))
+	gamificationRouter.UserRegister(v1.Group("/user"))
+	gamificationRouter.HabitRegister(v1.Group("/habit"))
 
 	r.Run()
 }

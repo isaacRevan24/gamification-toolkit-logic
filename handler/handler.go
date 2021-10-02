@@ -15,31 +15,22 @@ var (
 )
 
 type UserHandlerInterface interface {
-	UserRegister(router *gin.RouterGroup)
+	SignUp(context *gin.Context)
 }
 
 type HabitHandlerInterface interface {
-	HabitRegister(router *gin.RouterGroup)
+	AddHabit(context *gin.Context)
 }
 
 type userHandler struct{}
 
 type habitHandler struct{}
 
-func NewUserHandler() UserHandlerInterface {
-	return &userHandler{}
-}
-
 func NewHabitHandler() HabitHandlerInterface {
 	return &habitHandler{}
 }
-
-func (*userHandler) UserRegister(router *gin.RouterGroup) {
-	router.POST("/sign-up", signUp)
-}
-
-func (*habitHandler) HabitRegister(router *gin.RouterGroup) {
-	router.POST("/new", addHabit)
+func NewUserHandler() UserHandlerInterface {
+	return &userHandler{}
 }
 
 func getHttpStatusByCode(code string) int {
