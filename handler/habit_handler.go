@@ -8,7 +8,7 @@ import (
 	"github.com/isaacRevan24/gamification-toolkit-logic/model"
 )
 
-func addHabit(context *gin.Context) {
+func (*habitHandler) AddHabit(context *gin.Context) {
 	const functionName string = "addHabit"
 	Logs.LogDebug("Start " + functionName)
 
