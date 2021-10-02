@@ -1,3 +1,4 @@
+//go:generate go run github.com/golang/mock/mockgen -source logging.go -destination mock/logging_mock.go -package mock
 package utility
 
 import (
