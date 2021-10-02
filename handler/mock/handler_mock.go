@@ -34,16 +34,16 @@ func (m *MockUserHandlerInterface) EXPECT() *MockUserHandlerInterfaceMockRecorde
 	return m.recorder
 }
 
-// UserRegister mocks base method.
-func (m *MockUserHandlerInterface) UserRegister(router *gin.RouterGroup) {
+// SignUp mocks base method.
+func (m *MockUserHandlerInterface) SignUp(context *gin.Context) {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "UserRegister", router)
+	m.ctrl.Call(m, "SignUp", context)
 }
 
-// UserRegister indicates an expected call of UserRegister.
-func (mr *MockUserHandlerInterfaceMockRecorder) UserRegister(router interface{}) *gomock.Call {
+// SignUp indicates an expected call of SignUp.
+func (mr *MockUserHandlerInterfaceMockRecorder) SignUp(context interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserRegister", reflect.TypeOf((*MockUserHandlerInterface)(nil).UserRegister), router)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SignUp", reflect.TypeOf((*MockUserHandlerInterface)(nil).SignUp), context)
 }
 
 // MockHabitHandlerInterface is a mock of HabitHandlerInterface interface.
@@ -69,14 +69,14 @@ func (m *MockHabitHandlerInterface) EXPECT() *MockHabitHandlerInterfaceMockRecor
 	return m.recorder
 }
 
-// HabitRegister mocks base method.
-func (m *MockHabitHandlerInterface) HabitRegister(router *gin.RouterGroup) {
+// AddHabit mocks base method.
+func (m *MockHabitHandlerInterface) AddHabit(context *gin.Context) {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "HabitRegister", router)
+	m.ctrl.Call(m, "AddHabit", context)
 }
 
-// HabitRegister indicates an expected call of HabitRegister.
-func (mr *MockHabitHandlerInterfaceMockRecorder) HabitRegister(router interface{}) *gomock.Call {
+// AddHabit indicates an expected call of AddHabit.
+func (mr *MockHabitHandlerInterfaceMockRecorder) AddHabit(context interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HabitRegister", reflect.TypeOf((*MockHabitHandlerInterface)(nil).HabitRegister), router)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddHabit", reflect.TypeOf((*MockHabitHandlerInterface)(nil).AddHabit), context)
 }
