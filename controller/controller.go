@@ -1,3 +1,4 @@
+//go:generate go run github.com/golang/mock/mockgen -source controller.go -destination mock/controller_mock.go -package mock
 package controller
 
 import (
@@ -7,8 +8,9 @@ import (
 )
 
 var (
-	repo *repository.Repo
-	Logs utility.LoggingInterface = utility.NewLogging()
+	userRepository  repository.UserRepository    = repository.NewUserRepository()
+	habitRepository repository.HandlerRepository = repository.NewHabitRepository()
+	Logs            utility.LoggingInterface     = utility.NewLogging()
 )
 
 type UserControllerInterface interface {

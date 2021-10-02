@@ -1,6 +1,6 @@
 package repository
 
-func (r Repo) SignUpRepository(userId string) error {
+func (r *repo) SignUpRepository(userId string) error {
 	const functionName string = "SignUpRepository"
 	Logs.LogDebug("Start " + functionName)
 
