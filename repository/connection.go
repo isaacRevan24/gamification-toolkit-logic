@@ -1,3 +1,4 @@
+//go:generate go run github.com/golang/mock/mockgen -source connection.go -destination mock/connection_mock.go -package mock
 package repository
 
 import (
@@ -21,11 +22,29 @@ const (
 	dbname   = "gamify"
 )
 
-type Repo struct {
+type UserRepository interface {
+	SignUpRepository(userId string) error
+}
+
+type HandlerRepository interface {
+	AddNewHabitRepository(userId string, name string, description string, condition string, repetition int) (int, error)
+}
+
+type repo struct {
 	db *sql.DB
 }
 
-func GetConnection() (*Repo, error) {
+func NewUserRepository() UserRepository {
+	repo, _ := getConnection()
+	return repo
+}
+
+func NewHabitRepository() HandlerRepository {
+	repo, _ := getConnection()
+	return repo
+}
+
+func getConnection() (*repo, error) {
 
 	db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname))
 
@@ -34,5 +53,5 @@ func GetConnection() (*Repo, error) {
 		return nil, err
 	}
 
-	return &Repo{db: db}, nil
+	return &repo{db: db}, nil
 }

@@ -6,6 +6,11 @@ import (
 	"github.com/isaacRevan24/gamification-toolkit-logic/handler"
 )
 
+var (
+	userHandler  handler.UserHandlerInterface  = handler.NewUserHandler()
+	habitHandler handler.HabitHandlerInterface = handler.NewHabitHandler()
+)
+
 func main() {
 
 	r := gin.Default()
@@ -14,8 +19,8 @@ func main() {
 
 	v1 := r.Group("/v1")
 
-	handler.UserRegister(v1.Group("/user"))
-	handler.HabitRegister(v1.Group("/habit"))
+	userHandler.UserRegister(v1.Group("/user"))
+	habitHandler.HabitRegister(v1.Group("/habit"))
 
 	r.Run()
 }

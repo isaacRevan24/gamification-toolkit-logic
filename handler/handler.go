@@ -1,3 +1,4 @@
+//go:generate go run github.com/golang/mock/mockgen -source handler.go -destination mock/handler_mock.go -package mock
 package handler
 
 import (
@@ -12,11 +13,31 @@ var (
 	Logs utility.LoggingInterface
 )
 
-func UserRegister(router *gin.RouterGroup) {
+type UserHandlerInterface interface {
+	UserRegister(router *gin.RouterGroup)
+}
+
+type HabitHandlerInterface interface {
+	HabitRegister(router *gin.RouterGroup)
+}
+
+type userHandler struct{}
+
+type habitHandler struct{}
+
+func NewUserHandler() UserHandlerInterface {
+	return &userHandler{}
+}
+
+func NewHabitHandler() HabitHandlerInterface {
+	return &habitHandler{}
+}
+
+func (*userHandler) UserRegister(router *gin.RouterGroup) {
 	router.POST("/sign-up", signUp)
 }
 
-func HabitRegister(router *gin.RouterGroup) {
+func (*habitHandler) HabitRegister(router *gin.RouterGroup) {
 	router.POST("/new", addHabit)
 }
 

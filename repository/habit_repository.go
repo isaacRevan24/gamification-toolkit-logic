@@ -1,6 +1,6 @@
 package repository
 
-func (r Repo) AddNewHabitRepository(userId string, name string, description string, condition string, repetition int) (int, error) {
+func (r *repo) AddNewHabitRepository(userId string, name string, description string, condition string, repetition int) (int, error) {
 	const functionName string = "AddNewHabitRepository"
 	Logs.LogDebug("Start " + functionName)
 
