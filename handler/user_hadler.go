@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/isaacRevan24/gamification-toolkit-logic/controller"
 	"github.com/isaacRevan24/gamification-toolkit-logic/model"
 )
 
@@ -13,17 +12,27 @@ func (*userHandler) SignUp(context *gin.Context) {
 	Logs.LogDebug("Start " + functionName)
 
 	var signUpRequest model.SignUpRequest
-	err := mapper.GenericRequestJsonMapper(&signUpRequest, context)
+	var response model.SignUpResponse
+	mapperError := mapper.GenericRequestJsonMapper(&signUpRequest, context)
 
-	if err != nil {
-		Logs.LogError(err)
+	if mapperError != nil {
+		Logs.LogError(mapperError)
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Missing arguments."})
 		return
 	}
 
-	var controller controller.UserControllerInterface = controller.NewUserController(userRepository)
-	response := controller.SignUpController(signUpRequest)
+	signUpError := userController.SignUp(signUpRequest)
+
+	if signUpError != nil {
+		response.Status.Code = model.BAD_REQUEST_ERROR_STATUS
+		response.Status.Message = "Error saving the user"
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	response.Status.Code = model.SUCCESS_CODE_STATUS
+	response.Status.Message = "Successfully saved user."
 
 	Logs.LogDebug("End " + functionName)
-	context.JSON(getHttpStatusByCode(response.Status.Code), response)
+	context.JSON(http.StatusOK, response)
 }

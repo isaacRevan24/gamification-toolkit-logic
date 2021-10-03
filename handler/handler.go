@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/isaacRevan24/gamification-toolkit-logic/controller"
 	"github.com/isaacRevan24/gamification-toolkit-logic/model"
 	"github.com/isaacRevan24/gamification-toolkit-logic/repository"
 	"github.com/isaacRevan24/gamification-toolkit-logic/utility"
@@ -13,8 +14,10 @@ import (
 var (
 	mapper          utility.GamificationMapper = utility.NewGamificationMapper()
 	Logs            utility.LoggingInterface
-	userRepository  repository.UserRepository  = repository.NewUserRepository()
-	habitRepository repository.HabitRepository = repository.NewHabitRepository()
+	userRepository  repository.UserRepository           = repository.NewUserRepository()
+	habitRepository repository.HabitRepository          = repository.NewHabitRepository()
+	habitController controller.HabitControllerInterface = controller.NewHabitController(habitRepository)
+	userController  controller.UserControllerInterface  = controller.NewUserController(userRepository)
 )
 
 type UserHandlerInterface interface {
