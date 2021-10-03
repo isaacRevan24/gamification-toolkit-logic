@@ -43,11 +43,7 @@ var _ = Describe("User tests", func() {
 		response := underTest.SignUp(userId)
 
 		// Then
-		var expected model.SignUpResponse
-		expected.Status.Message = "Successfully saved user."
-		expected.Status.Code = model.SUCCESS_CODE_STATUS
-
-		Expect(response).Should(Equal(expected))
+		Expect(response).Should(BeNil())
 
 	})
 
@@ -63,11 +59,7 @@ var _ = Describe("User tests", func() {
 		response := underTest.SignUp(userId)
 
 		// Then
-		var expected model.SignUpResponse
-		expected.Status.Message = "Error saving the user"
-		expected.Status.Code = model.BAD_REQUEST_ERROR_STATUS
-
-		Expect(response).Should(Equal(expected))
+		Expect(response).Should(MatchError(errors.New("SQL error")))
 
 	})
 
@@ -103,15 +95,11 @@ var _ = Describe("Habit tests", func() {
 		newHabitRequest.Repetition = 1
 
 		// When
-		response, _ := underTest.AddNewHabit(newHabitRequest)
+		response, err := underTest.AddNewHabit(newHabitRequest)
 
 		// Then
-		var expected model.AddNewHabitResponse
-		expected.Status.Code = model.SUCCESS_CODE_STATUS
-		expected.Status.Message = "New habit created"
-		expected.HabitId = 1
-
-		Expect(response).Should(Equal(expected))
+		Expect(response).Should(Equal(1))
+		Expect(err).Should(BeNil())
 
 	})
 
@@ -128,14 +116,11 @@ var _ = Describe("Habit tests", func() {
 		newHabitRequest.Repetition = 1
 
 		// When
-		response, _ := underTest.AddNewHabit(newHabitRequest)
+		response, err := underTest.AddNewHabit(newHabitRequest)
 
 		// Then
-		var expected model.AddNewHabitResponse
-		expected.Status.Code = model.BAD_REQUEST_ERROR_STATUS
-		expected.Status.Message = "Error creating new habit."
-
-		Expect(response).Should(Equal(expected))
+		Expect(err).Should(MatchError(errors.New("SQL error")))
+		Expect(response).Should(Equal(0))
 
 	})
 
