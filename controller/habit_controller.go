@@ -8,6 +8,14 @@ func (*habitController) AddNewHabit(reques model.AddNewHabitRequest) (int, error
 	const functionName string = "AddNewHabitController"
 	Logs.LogDebug("Start " + functionName)
 
+	conditionError := validateHabitCondition(reques.Condition)
+
+	if conditionError != nil {
+		Logs.LogError(conditionError)
+		Logs.LogDebug("End " + functionName)
+		return 0, conditionError
+	}
+
 	habitId, err := habitRepository.AddNewHabitRepository(reques.UserId, reques.Name, reques.Description, reques.Condition, reques.Repetition)
 
 	if err != nil {
@@ -19,4 +27,16 @@ func (*habitController) AddNewHabit(reques model.AddNewHabitRequest) (int, error
 	Logs.LogDebug("End " + functionName)
 
 	return habitId, nil
+}
+
+func validateHabitCondition(condition string) error {
+	var conditionTypes = [3]string{"D", "W", "Y"}
+
+	for _, i := range conditionTypes {
+		if condition == i {
+			return nil
+		}
+	}
+
+	return ErrorInvalidHabitCondition
 }
