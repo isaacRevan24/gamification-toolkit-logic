@@ -34,18 +34,18 @@ func (m *MockUserControllerInterface) EXPECT() *MockUserControllerInterfaceMockR
 	return m.recorder
 }
 
-// SignUpController mocks base method.
-func (m *MockUserControllerInterface) SignUpController(request model.SignUpRequest) model.SignUpResponse {
+// SignUp mocks base method.
+func (m *MockUserControllerInterface) SignUp(request model.SignUpRequest) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SignUpController", request)
-	ret0, _ := ret[0].(model.SignUpResponse)
+	ret := m.ctrl.Call(m, "SignUp", request)
+	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// SignUpController indicates an expected call of SignUpController.
-func (mr *MockUserControllerInterfaceMockRecorder) SignUpController(request interface{}) *gomock.Call {
+// SignUp indicates an expected call of SignUp.
+func (mr *MockUserControllerInterfaceMockRecorder) SignUp(request interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SignUpController", reflect.TypeOf((*MockUserControllerInterface)(nil).SignUpController), request)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SignUp", reflect.TypeOf((*MockUserControllerInterface)(nil).SignUp), request)
 }
 
 // MockHabitControllerInterface is a mock of HabitControllerInterface interface.
@@ -71,16 +71,17 @@ func (m *MockHabitControllerInterface) EXPECT() *MockHabitControllerInterfaceMoc
 	return m.recorder
 }
 
-// AddNewHabitController mocks base method.
-func (m *MockHabitControllerInterface) AddNewHabitController(reques model.AddNewHabitRequest) model.AddNewHabitResponse {
+// AddNewHabit mocks base method.
+func (m *MockHabitControllerInterface) AddNewHabit(reques model.AddNewHabitRequest) (int, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AddNewHabitController", reques)
-	ret0, _ := ret[0].(model.AddNewHabitResponse)
-	return ret0
+	ret := m.ctrl.Call(m, "AddNewHabit", reques)
+	ret0, _ := ret[0].(int)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
-// AddNewHabitController indicates an expected call of AddNewHabitController.
-func (mr *MockHabitControllerInterfaceMockRecorder) AddNewHabitController(reques interface{}) *gomock.Call {
+// AddNewHabit indicates an expected call of AddNewHabit.
+func (mr *MockHabitControllerInterfaceMockRecorder) AddNewHabit(reques interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddNewHabitController", reflect.TypeOf((*MockHabitControllerInterface)(nil).AddNewHabitController), reques)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddNewHabit", reflect.TypeOf((*MockHabitControllerInterface)(nil).AddNewHabit), reques)
 }
