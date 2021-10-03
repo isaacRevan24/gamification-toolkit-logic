@@ -14,10 +14,10 @@ var (
 )
 
 type UserControllerInterface interface {
-	SignUpController(request model.SignUpRequest) model.SignUpResponse
+	SignUp(request model.SignUpRequest) error
 }
 type HabitControllerInterface interface {
-	AddNewHabitController(reques model.AddNewHabitRequest) model.AddNewHabitResponse
+	AddNewHabit(reques model.AddNewHabitRequest) (int, error)
 }
 
 type userController struct{}

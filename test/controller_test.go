@@ -40,7 +40,7 @@ var _ = Describe("User tests", func() {
 		userId.ID = "1111111"
 
 		// When
-		response := underTest.SignUpController(userId)
+		response := underTest.SignUp(userId)
 
 		// Then
 		var expected model.SignUpResponse
@@ -60,7 +60,7 @@ var _ = Describe("User tests", func() {
 		userId.ID = "1111111"
 
 		// When
-		response := underTest.SignUpController(userId)
+		response := underTest.SignUp(userId)
 
 		// Then
 		var expected model.SignUpResponse
@@ -103,10 +103,9 @@ var _ = Describe("Habit tests", func() {
 		newHabitRequest.Repetition = 1
 
 		// When
-		response := underTest.AddNewHabitController(newHabitRequest)
+		response, _ := underTest.AddNewHabit(newHabitRequest)
 
 		// Then
-
 		var expected model.AddNewHabitResponse
 		expected.Status.Code = model.SUCCESS_CODE_STATUS
 		expected.Status.Message = "New habit created"
@@ -129,7 +128,7 @@ var _ = Describe("Habit tests", func() {
 		newHabitRequest.Repetition = 1
 
 		// When
-		response := underTest.AddNewHabitController(newHabitRequest)
+		response, _ := underTest.AddNewHabit(newHabitRequest)
 
 		// Then
 		var expected model.AddNewHabitResponse
