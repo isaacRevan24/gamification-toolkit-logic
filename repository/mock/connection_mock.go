@@ -47,31 +47,31 @@ func (mr *MockUserRepositoryMockRecorder) SignUpRepository(userId interface{}) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SignUpRepository", reflect.TypeOf((*MockUserRepository)(nil).SignUpRepository), userId)
 }
 
-// MockHandlerRepository is a mock of HandlerRepository interface.
-type MockHandlerRepository struct {
+// MockHabitRepository is a mock of HabitRepository interface.
+type MockHabitRepository struct {
 	ctrl     *gomock.Controller
-	recorder *MockHandlerRepositoryMockRecorder
+	recorder *MockHabitRepositoryMockRecorder
 }
 
-// MockHandlerRepositoryMockRecorder is the mock recorder for MockHandlerRepository.
-type MockHandlerRepositoryMockRecorder struct {
-	mock *MockHandlerRepository
+// MockHabitRepositoryMockRecorder is the mock recorder for MockHabitRepository.
+type MockHabitRepositoryMockRecorder struct {
+	mock *MockHabitRepository
 }
 
-// NewMockHandlerRepository creates a new mock instance.
-func NewMockHandlerRepository(ctrl *gomock.Controller) *MockHandlerRepository {
-	mock := &MockHandlerRepository{ctrl: ctrl}
-	mock.recorder = &MockHandlerRepositoryMockRecorder{mock}
+// NewMockHabitRepository creates a new mock instance.
+func NewMockHabitRepository(ctrl *gomock.Controller) *MockHabitRepository {
+	mock := &MockHabitRepository{ctrl: ctrl}
+	mock.recorder = &MockHabitRepositoryMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockHandlerRepository) EXPECT() *MockHandlerRepositoryMockRecorder {
+func (m *MockHabitRepository) EXPECT() *MockHabitRepositoryMockRecorder {
 	return m.recorder
 }
 
 // AddNewHabitRepository mocks base method.
-func (m *MockHandlerRepository) AddNewHabitRepository(userId, name, description, condition string, repetition int) (int, error) {
+func (m *MockHabitRepository) AddNewHabitRepository(userId, name, description, condition string, repetition int) (int, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddNewHabitRepository", userId, name, description, condition, repetition)
 	ret0, _ := ret[0].(int)
@@ -80,7 +80,7 @@ func (m *MockHandlerRepository) AddNewHabitRepository(userId, name, description,
 }
 
 // AddNewHabitRepository indicates an expected call of AddNewHabitRepository.
-func (mr *MockHandlerRepositoryMockRecorder) AddNewHabitRepository(userId, name, description, condition, repetition interface{}) *gomock.Call {
+func (mr *MockHabitRepositoryMockRecorder) AddNewHabitRepository(userId, name, description, condition, repetition interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddNewHabitRepository", reflect.TypeOf((*MockHandlerRepository)(nil).AddNewHabitRepository), userId, name, description, condition, repetition)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddNewHabitRepository", reflect.TypeOf((*MockHabitRepository)(nil).AddNewHabitRepository), userId, name, description, condition, repetition)
 }

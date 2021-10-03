@@ -13,8 +13,8 @@ import (
 var (
 	mapper          utility.GamificationMapper = utility.NewGamificationMapper()
 	Logs            utility.LoggingInterface
-	userRepository  repository.UserRepository    = repository.NewUserRepository()
-	habitRepository repository.HandlerRepository = repository.NewHabitRepository()
+	userRepository  repository.UserRepository  = repository.NewUserRepository()
+	habitRepository repository.HabitRepository = repository.NewHabitRepository()
 )
 
 type UserHandlerInterface interface {
