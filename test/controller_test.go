@@ -103,7 +103,7 @@ var _ = Describe("Habit tests", func() {
 
 	})
 
-	It("Add new habit fail", func() {
+	It("Add new habit fail because repository error", func() {
 		// Mock
 		mockHabitRepostory.EXPECT().AddNewHabitRepository(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(0, errors.New("SQL error"))
 
@@ -120,6 +120,24 @@ var _ = Describe("Habit tests", func() {
 
 		// Then
 		Expect(err).Should(MatchError(errors.New("SQL error")))
+		Expect(response).Should(Equal(0))
+
+	})
+
+	It("Add new habit fail because invalid condition type", func() {
+		// Given
+		var newHabitRequest model.AddNewHabitRequest
+		newHabitRequest.UserId = "userId"
+		newHabitRequest.Condition = "InvalidType"
+		newHabitRequest.Description = "testDescription"
+		newHabitRequest.Name = "habit name"
+		newHabitRequest.Repetition = 1
+
+		// When
+		response, err := underTest.AddNewHabit(newHabitRequest)
+
+		// Then
+		Expect(err).Should(MatchError(controller.ErrorInvalidHabitCondition))
 		Expect(response).Should(Equal(0))
 
 	})
