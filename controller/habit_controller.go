@@ -30,7 +30,6 @@ func (*habitController) AddNewHabit(reques model.AddNewHabitRequest) (int, error
 }
 
 func validateHabitCondition(condition string) error {
-	var conditionTypes = [3]string{"D", "W", "Y"}
 
 	for _, i := range conditionTypes {
 		if condition == i {

@@ -11,6 +11,8 @@ var (
 	userRepository  repository.UserRepository
 	habitRepository repository.HabitRepository
 	Logs            utility.LoggingInterface = utility.NewLogging()
+
+	conditionTypes = [3]string{"D", "W", "Y"}
 )
 
 type UserControllerInterface interface {
