@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/golang/mock/gomock"
@@ -45,6 +46,26 @@ var _ = Describe("Hello func", func() {
 		var expected model.SignUpResponse
 		expected.Status.Message = "Successfully saved user."
 		expected.Status.Code = model.SUCCESS_CODE_STATUS
+
+		Expect(response).Should(Equal(expected))
+
+	})
+
+	It("Sign up failed", func() {
+		// Mock
+		mockUserRepository.EXPECT().SignUpRepository(gomock.Any()).Return(errors.New("SQL error"))
+
+		// Given
+		var userId model.SignUpRequest
+		userId.ID = "1111111"
+
+		// When
+		response := underTest.SignUpController(userId)
+
+		// Then
+		var expected model.SignUpResponse
+		expected.Status.Message = "Error saving the user"
+		expected.Status.Code = model.BAD_REQUEST_ERROR_STATUS
 
 		Expect(response).Should(Equal(expected))
 
