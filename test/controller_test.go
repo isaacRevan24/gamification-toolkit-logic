@@ -17,7 +17,7 @@ func TestController(t *testing.T) {
 	RunSpecs(t, "Controller Test suit")
 }
 
-var _ = Describe("Hello func", func() {
+var _ = Describe("User tests", func() {
 
 	var (
 		mockCtrl           *gomock.Controller
@@ -74,4 +74,70 @@ var _ = Describe("Hello func", func() {
 	AfterEach(func() {
 		mockCtrl.Finish()
 	})
+})
+
+var _ = Describe("Habit tests", func() {
+
+	var (
+		mockCtrl           *gomock.Controller
+		mockHabitRepostory *mock.MockHabitRepository
+		underTest          controller.HabitControllerInterface
+	)
+
+	BeforeEach(func() {
+		mockCtrl = gomock.NewController(GinkgoT())
+		mockHabitRepostory = mock.NewMockHabitRepository(mockCtrl)
+		underTest = controller.NewHabitController(mockHabitRepostory)
+	})
+
+	It("Add new habit success", func() {
+		// Mock
+		mockHabitRepostory.EXPECT().AddNewHabitRepository(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(1, nil)
+
+		// Given
+		var newHabitRequest model.AddNewHabitRequest
+		newHabitRequest.UserId = "userId"
+		newHabitRequest.Condition = "Y"
+		newHabitRequest.Description = "testDescription"
+		newHabitRequest.Name = "habit name"
+		newHabitRequest.Repetition = 1
+
+		// When
+		response := underTest.AddNewHabitController(newHabitRequest)
+
+		// Then
+
+		var expected model.AddNewHabitResponse
+		expected.Status.Code = model.SUCCESS_CODE_STATUS
+		expected.Status.Message = "New habit created"
+		expected.HabitId = 1
+
+		Expect(response).Should(Equal(expected))
+
+	})
+
+	It("Add new habit fail", func() {
+		// Mock
+		mockHabitRepostory.EXPECT().AddNewHabitRepository(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(0, errors.New("SQL error"))
+
+		// Given
+		var newHabitRequest model.AddNewHabitRequest
+		newHabitRequest.UserId = "userId"
+		newHabitRequest.Condition = "Y"
+		newHabitRequest.Description = "testDescription"
+		newHabitRequest.Name = "habit name"
+		newHabitRequest.Repetition = 1
+
+		// When
+		response := underTest.AddNewHabitController(newHabitRequest)
+
+		// Then
+		var expected model.AddNewHabitResponse
+		expected.Status.Code = model.BAD_REQUEST_ERROR_STATUS
+		expected.Status.Message = "Error creating new habit."
+
+		Expect(response).Should(Equal(expected))
+
+	})
+
 })
