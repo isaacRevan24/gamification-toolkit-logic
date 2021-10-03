@@ -21,7 +21,7 @@ func (*userHandler) SignUp(context *gin.Context) {
 		return
 	}
 
-	var controller controller.UserControllerInterface = controller.NewUserController()
+	var controller controller.UserControllerInterface = controller.NewUserController(userRepository)
 	response := controller.SignUpController(signUpRequest)
 
 	Logs.LogDebug("End " + functionName)

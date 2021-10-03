@@ -20,7 +20,7 @@ func (*habitHandler) AddHabit(context *gin.Context) {
 		return
 	}
 
-	var controller controller.HabitControllerInterface = controller.NewHabitController()
+	var controller controller.HabitControllerInterface = controller.NewHabitController(habitRepository)
 	response := controller.AddNewHabitController(addNewHabitRequest)
 
 	Logs.LogDebug("End " + functionName)

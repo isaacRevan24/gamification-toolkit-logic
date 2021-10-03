@@ -8,9 +8,9 @@ import (
 )
 
 var (
-	userRepository  repository.UserRepository    = repository.NewUserRepository()
-	habitRepository repository.HandlerRepository = repository.NewHabitRepository()
-	Logs            utility.LoggingInterface     = utility.NewLogging()
+	userRepository  repository.UserRepository
+	habitRepository repository.HandlerRepository
+	Logs            utility.LoggingInterface = utility.NewLogging()
 )
 
 type UserControllerInterface interface {
@@ -24,10 +24,12 @@ type userController struct{}
 
 type habitController struct{}
 
-func NewUserController() UserControllerInterface {
+func NewUserController(repo repository.UserRepository) UserControllerInterface {
+	userRepository = repo
 	return &userController{}
 }
 
-func NewHabitController() HabitControllerInterface {
+func NewHabitController(repo repository.HandlerRepository) HabitControllerInterface {
+	habitRepository = repo
 	return &habitController{}
 }

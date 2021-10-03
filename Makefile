@@ -3,5 +3,5 @@ generate-mock:
 	go generate -v ./...
 
 run-tests:
-	echo "Running all tests"
-	go test ./tests/... -v
+	echo "Running all"
+	go test ./test/... -v
