@@ -9,7 +9,7 @@ import (
 
 var (
 	userRepository  repository.UserRepository
-	habitRepository repository.HandlerRepository
+	habitRepository repository.HabitRepository
 	Logs            utility.LoggingInterface = utility.NewLogging()
 )
 
@@ -29,7 +29,7 @@ func NewUserController(repo repository.UserRepository) UserControllerInterface {
 	return &userController{}
 }
 
-func NewHabitController(repo repository.HandlerRepository) HabitControllerInterface {
+func NewHabitController(repo repository.HabitRepository) HabitControllerInterface {
 	habitRepository = repo
 	return &habitController{}
 }

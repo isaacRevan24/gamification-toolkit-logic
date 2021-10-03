@@ -26,7 +26,7 @@ type UserRepository interface {
 	SignUpRepository(userId string) error
 }
 
-type HandlerRepository interface {
+type HabitRepository interface {
 	AddNewHabitRepository(userId string, name string, description string, condition string, repetition int) (int, error)
 }
 
@@ -39,7 +39,7 @@ func NewUserRepository() UserRepository {
 	return repo
 }
 
-func NewHabitRepository() HandlerRepository {
+func NewHabitRepository() HabitRepository {
 	repo, _ := getConnection()
 	return repo
 }
