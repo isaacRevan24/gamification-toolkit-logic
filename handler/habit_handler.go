@@ -54,19 +54,23 @@ func (*habitHandler) DeleteHabit(context *gin.Context) {
 	const functionName string = "DeleteHabit"
 	Logs.LogDebug("Start " + functionName)
 
-	var deleteHabitRequest model.DeleteHabitRequest
-	var deleteHabitResponse model.DeleteHabitResponse
+	habitId := context.Param("id")
+	userId := context.Param("user")
+	Logs.LogDebug(habitId)
+	Logs.LogDebug(userId)
 
-	mappingError := mapper.GenericRequestJsonMapper(&deleteHabitRequest, context)
+	var response model.DeleteHabitResponse
 
-	if mappingError != nil {
-		Logs.LogError(mappingError)
-		context.JSON(http.StatusBadRequest, gin.H{"error": "Missing arguments."})
+	controllerError := habitRepository.DeleteHabitRepository(userId, habitId)
+
+	if controllerError != nil {
+		response.Status = mapper.StatusBuilder(model.BAD_REQUEST_ERROR_STATUS, "Error deleting habit.")
+		Logs.LogError(controllerError)
+		context.JSON(http.StatusInternalServerError, response)
 		return
 	}
 
-	deleteHabitResponse.Status = mapper.StatusBuilder(model.SUCCESS_CODE_STATUS, "Habit deleted.")
-
+	response.Status = mapper.StatusBuilder(model.SUCCESS_CODE_STATUS, "Habit deleted.")
 	Logs.LogDebug("End " + functionName)
-	context.JSON(http.StatusOK, deleteHabitResponse)
+	context.JSON(http.StatusOK, response)
 }

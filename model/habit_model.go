@@ -13,11 +13,6 @@ type AddNewHabitResponse struct {
 	HabitId int            `json:"habit-id"`
 }
 
-type DeleteHabitRequest struct {
-	UserId  string `json:"user-id" binding:"required"`
-	HabitId int    `json:"habit-id" binding:"required"`
-}
-
 type DeleteHabitResponse struct {
 	Status StatusResponse `json:"status"`
 }

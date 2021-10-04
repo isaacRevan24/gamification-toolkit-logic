@@ -28,4 +28,5 @@ func (*routerRegisters) UserRegister(router *gin.RouterGroup) {
 
 func (*routerRegisters) HabitRegister(router *gin.RouterGroup) {
 	router.POST("/new", habitHandler.AddHabit)
+	router.DELETE("/:id/user/:user", habitHandler.DeleteHabit)
 }
