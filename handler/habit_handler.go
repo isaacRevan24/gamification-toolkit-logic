@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/isaacRevan24/gamification-toolkit-logic/controller"
 	"github.com/isaacRevan24/gamification-toolkit-logic/model"
 )
 
@@ -24,7 +25,16 @@ func (*habitHandler) AddHabit(context *gin.Context) {
 
 	habitId, controllerError := habitController.AddNewHabit(addNewHabitRequest)
 
-	if controllerError != nil {
+	if controllerError == controller.ErrorInvalidHabitCondition {
+
+		response.Status = mapper.StatusBuilder(model.BAD_REQUEST_ERROR_STATUS, "Invalid habit condition.")
+
+		Logs.LogError(controllerError)
+		context.JSON(http.StatusBadRequest, response)
+		return
+
+	} else if controllerError != nil {
+
 		response.Status = mapper.StatusBuilder(model.BAD_REQUEST_ERROR_STATUS, "Error creating new habit.")
 
 		Logs.LogError(controllerError)
