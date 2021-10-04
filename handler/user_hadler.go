@@ -24,14 +24,15 @@ func (*userHandler) SignUp(context *gin.Context) {
 	signUpError := userController.SignUp(signUpRequest)
 
 	if signUpError != nil {
-		response.Status.Code = model.BAD_REQUEST_ERROR_STATUS
-		response.Status.Message = "Error saving the user"
+		response.Status = mapper.StatusBuilder(model.BAD_REQUEST_ERROR_STATUS, "Error saving the user")
 		context.JSON(http.StatusBadRequest, response)
+
+		Logs.LogError(signUpError)
+		Logs.LogDebug("End " + functionName)
 		return
 	}
 
-	response.Status.Code = model.SUCCESS_CODE_STATUS
-	response.Status.Message = "Successfully saved user."
+	response.Status = mapper.StatusBuilder(model.SUCCESS_CODE_STATUS, "Successfully saved user.")
 
 	Logs.LogDebug("End " + functionName)
 	context.JSON(http.StatusOK, response)
