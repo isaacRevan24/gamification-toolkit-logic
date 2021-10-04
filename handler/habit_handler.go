@@ -25,15 +25,14 @@ func (*habitHandler) AddHabit(context *gin.Context) {
 	habitId, controllerError := habitController.AddNewHabit(addNewHabitRequest)
 
 	if controllerError != nil {
-		response.Status.Code = model.BAD_REQUEST_ERROR_STATUS
-		response.Status.Message = "Error creating new habit."
+		response.Status = mapper.StatusBuilder(model.BAD_REQUEST_ERROR_STATUS, "Error creating new habit.")
+
 		Logs.LogError(controllerError)
 		context.JSON(http.StatusBadRequest, response)
 		return
 	}
 
-	response.Status.Code = model.SUCCESS_CODE_STATUS
-	response.Status.Message = "New habit created"
+	response.Status = mapper.StatusBuilder(model.SUCCESS_CODE_STATUS, "New habit created")
 	response.HabitId = habitId
 
 	Logs.LogDebug("End " + functionName)
@@ -46,7 +45,7 @@ func (*habitHandler) DeleteHabit(context *gin.Context) {
 	Logs.LogDebug("Start " + functionName)
 
 	var deleteHabitRequest model.DeleteHabitRequest
-	//var deleteHabitResponse model.DeleteHabitResponse
+	var deleteHabitResponse model.DeleteHabitResponse
 
 	mappingError := mapper.GenericRequestJsonMapper(&deleteHabitRequest, context)
 
@@ -55,6 +54,9 @@ func (*habitHandler) DeleteHabit(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Missing arguments."})
 		return
 	}
+
+	deleteHabitResponse.Status = mapper.StatusBuilder(model.SUCCESS_CODE_STATUS, "Habit deleted.")
+
 	Logs.LogDebug("End " + functionName)
-	context.JSON(http.StatusOK, gin.H{"Status": "Habit deleted"})
+	context.JSON(http.StatusOK, deleteHabitResponse)
 }
