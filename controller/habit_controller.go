@@ -29,7 +29,24 @@ func (*habitController) AddNewHabit(reques model.AddNewHabitRequest) (int, error
 	return habitId, nil
 }
 
+func (*habitController) DeleteHabit(userId string, habitId string) error {
+	const functionName string = "DeleteHabit"
+	Logs.LogDebug("Start " + functionName)
+
+	err := habitRepository.DeleteHabitRepository(userId, habitId)
+
+	if err != nil {
+		Logs.LogDebug("End " + functionName)
+		return err
+	}
+
+	Logs.LogDebug("End " + functionName)
+	return nil
+}
+
 func validateHabitCondition(condition string) error {
+
+	conditionTypes := [3]string{"D", "W", "Y"}
 
 	for _, i := range conditionTypes {
 		if condition == i {

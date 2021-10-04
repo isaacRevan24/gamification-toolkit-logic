@@ -20,3 +20,24 @@ func (r *repo) AddNewHabitRepository(userId string, name string, description str
 
 	return habitId, nil
 }
+
+func (r *repo) DeleteHabitRepository(userId string, habitId string) error {
+	const functionName string = "AddNewHabitRepository"
+	Logs.LogDebug("Start " + functionName)
+
+	sqlStatemente := "DELETE FROM habit WHERE client_id = $1 and habit_id = $2"
+
+	_, err := r.db.Exec(sqlStatemente, userId, habitId)
+
+	if err != nil {
+		Logs.LogError(err)
+		Logs.LogDebug("End " + functionName)
+		return err
+	} else if err == nil {
+		// TODO: retornar custom error
+
+	}
+
+	Logs.LogDebug("End " + functionName)
+	return nil
+}

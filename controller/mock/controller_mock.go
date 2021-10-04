@@ -85,3 +85,17 @@ func (mr *MockHabitControllerInterfaceMockRecorder) AddNewHabit(reques interface
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddNewHabit", reflect.TypeOf((*MockHabitControllerInterface)(nil).AddNewHabit), reques)
 }
+
+// DeleteHabit mocks base method.
+func (m *MockHabitControllerInterface) DeleteHabit(userId, habitId string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteHabit", userId, habitId)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteHabit indicates an expected call of DeleteHabit.
+func (mr *MockHabitControllerInterfaceMockRecorder) DeleteHabit(userId, habitId interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteHabit", reflect.TypeOf((*MockHabitControllerInterface)(nil).DeleteHabit), userId, habitId)
+}

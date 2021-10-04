@@ -84,3 +84,17 @@ func (mr *MockHabitRepositoryMockRecorder) AddNewHabitRepository(userId, name, d
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddNewHabitRepository", reflect.TypeOf((*MockHabitRepository)(nil).AddNewHabitRepository), userId, name, description, condition, repetition)
 }
+
+// DeleteHabitRepository mocks base method.
+func (m *MockHabitRepository) DeleteHabitRepository(userId, habitId string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteHabitRepository", userId, habitId)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteHabitRepository indicates an expected call of DeleteHabitRepository.
+func (mr *MockHabitRepositoryMockRecorder) DeleteHabitRepository(userId, habitId interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteHabitRepository", reflect.TypeOf((*MockHabitRepository)(nil).DeleteHabitRepository), userId, habitId)
+}

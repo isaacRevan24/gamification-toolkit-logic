@@ -11,8 +11,6 @@ var (
 	userRepository  repository.UserRepository
 	habitRepository repository.HabitRepository
 	Logs            utility.LoggingInterface = utility.NewLogging()
-
-	conditionTypes = [3]string{"D", "W", "Y"}
 )
 
 type UserControllerInterface interface {
@@ -20,6 +18,7 @@ type UserControllerInterface interface {
 }
 type HabitControllerInterface interface {
 	AddNewHabit(reques model.AddNewHabitRequest) (int, error)
+	DeleteHabit(userId string, habitId string) error
 }
 
 type userController struct{}

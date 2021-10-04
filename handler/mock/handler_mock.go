@@ -80,3 +80,15 @@ func (mr *MockHabitHandlerInterfaceMockRecorder) AddHabit(context interface{}) *
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddHabit", reflect.TypeOf((*MockHabitHandlerInterface)(nil).AddHabit), context)
 }
+
+// DeleteHabit mocks base method.
+func (m *MockHabitHandlerInterface) DeleteHabit(context *gin.Context) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "DeleteHabit", context)
+}
+
+// DeleteHabit indicates an expected call of DeleteHabit.
+func (mr *MockHabitHandlerInterfaceMockRecorder) DeleteHabit(context interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteHabit", reflect.TypeOf((*MockHabitHandlerInterface)(nil).DeleteHabit), context)
+}
