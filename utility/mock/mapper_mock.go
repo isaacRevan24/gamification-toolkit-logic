@@ -9,6 +9,7 @@ import (
 
 	gin "github.com/gin-gonic/gin"
 	gomock "github.com/golang/mock/gomock"
+	model "github.com/isaacRevan24/gamification-toolkit-logic/model"
 )
 
 // MockGamificationMapper is a mock of GamificationMapper interface.
@@ -46,4 +47,18 @@ func (m *MockGamificationMapper) GenericRequestJsonMapper(request interface{}, c
 func (mr *MockGamificationMapperMockRecorder) GenericRequestJsonMapper(request, context interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GenericRequestJsonMapper", reflect.TypeOf((*MockGamificationMapper)(nil).GenericRequestJsonMapper), request, context)
+}
+
+// StatusBuilder mocks base method.
+func (m *MockGamificationMapper) StatusBuilder(code, message string) model.StatusResponse {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StatusBuilder", code, message)
+	ret0, _ := ret[0].(model.StatusResponse)
+	return ret0
+}
+
+// StatusBuilder indicates an expected call of StatusBuilder.
+func (mr *MockGamificationMapperMockRecorder) StatusBuilder(code, message interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StatusBuilder", reflect.TypeOf((*MockGamificationMapper)(nil).StatusBuilder), code, message)
 }
