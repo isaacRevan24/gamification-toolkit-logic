@@ -8,7 +8,7 @@ import (
 )
 
 func (*habitHandler) AddHabit(context *gin.Context) {
-	const functionName string = "addHabit"
+	const functionName string = "AddHabit"
 	Logs.LogDebug("Start " + functionName)
 
 	var addNewHabitRequest model.AddNewHabitRequest
@@ -39,4 +39,22 @@ func (*habitHandler) AddHabit(context *gin.Context) {
 	Logs.LogDebug("End " + functionName)
 
 	context.JSON(http.StatusOK, response)
+}
+
+func (*habitHandler) DeleteHabit(context *gin.Context) {
+	const functionName string = "DeleteHabit"
+	Logs.LogDebug("Start " + functionName)
+
+	var deleteHabitRequest model.DeleteHabitRequest
+	//var deleteHabitResponse model.DeleteHabitResponse
+
+	mappingError := mapper.GenericRequestJsonMapper(&deleteHabitRequest, context)
+
+	if mappingError != nil {
+		Logs.LogError(mappingError)
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Missing arguments."})
+		return
+	}
+	Logs.LogDebug("End " + functionName)
+	context.JSON(http.StatusOK, gin.H{"Status": "Habit deleted"})
 }
