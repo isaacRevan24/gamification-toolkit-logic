@@ -38,6 +38,8 @@ func (r *repo) DeleteHabitRepository(userId string, habitId string) (bool, error
 
 		if err == nil {
 			if count == 0 {
+				Logs.LogDebug("Habit already deleted")
+				Logs.LogDebug("End " + functionName)
 				return false, nil
 			}
 		}
