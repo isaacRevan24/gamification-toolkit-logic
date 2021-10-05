@@ -28,7 +28,7 @@ type UserRepository interface {
 
 type HabitRepository interface {
 	AddNewHabitRepository(userId string, name string, description string, condition string, repetition int) (int, error)
-	DeleteHabitRepository(userId string, habitId string) error
+	DeleteHabitRepository(userId string, habitId string) (bool, error)
 }
 
 type repo struct {
