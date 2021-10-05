@@ -82,7 +82,7 @@ var _ = Describe("Habit tests", func() {
 		underTest = controller.NewHabitController(mockHabitRepostory)
 	})
 
-	It("Add new habit success", func() {
+	It("Should add a new habit successfully", func() {
 		// Mock
 		mockHabitRepostory.EXPECT().AddNewHabitRepository(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(1, nil)
 
@@ -103,7 +103,7 @@ var _ = Describe("Habit tests", func() {
 
 	})
 
-	It("Add new habit fail because repository error", func() {
+	It("Should fail to add a new habit because database error", func() {
 		// Mock
 		mockHabitRepostory.EXPECT().AddNewHabitRepository(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(0, errors.New("SQL error"))
 
@@ -124,7 +124,7 @@ var _ = Describe("Habit tests", func() {
 
 	})
 
-	It("Add new habit fail because invalid condition type", func() {
+	It("Should fail to add a new habit because invalid condition type", func() {
 		// Given
 		var newHabitRequest model.AddNewHabitRequest
 		newHabitRequest.UserId = "userId"
@@ -139,7 +139,53 @@ var _ = Describe("Habit tests", func() {
 		// Then
 		Expect(err).Should(MatchError(controller.ErrorInvalidHabitCondition))
 		Expect(response).Should(Equal(0))
-
 	})
 
+	It("Should successfully delete a habit", func() {
+		// Mock
+		mockHabitRepostory.EXPECT().DeleteHabitRepository(gomock.Any(), gomock.Any()).Return(true, nil)
+
+		// Given
+		userId := "testId"
+		habitId := "testHabitId"
+
+		// When
+		res, err := underTest.DeleteHabit(userId, habitId)
+
+		// Then
+		Expect(res).Should(BeTrue())
+		Expect(err).Should(BeNil())
+	})
+
+	It("Should fail to delete a habit because database error", func() {
+		// Mock
+		mockHabitRepostory.EXPECT().DeleteHabitRepository(gomock.Any(), gomock.Any()).Return(false, errors.New("SQL error"))
+
+		// Given
+		userId := "testId"
+		habitId := "testHabitId"
+
+		// When
+		res, err := underTest.DeleteHabit(userId, habitId)
+
+		// Then
+		Expect(res).Should(BeFalse())
+		Expect(err).Should(MatchError(errors.New("SQL error")))
+	})
+
+	It("Should fail because habit is already deleted", func() {
+		// Mock
+		mockHabitRepostory.EXPECT().DeleteHabitRepository(gomock.Any(), gomock.Any()).Return(false, nil)
+
+		// Given
+		userId := "testId"
+		habitId := "testHabitId"
+
+		// When
+		res, err := underTest.DeleteHabit(userId, habitId)
+
+		// Then
+		Expect(res).Should(BeFalse())
+		Expect(err).Should(BeNil())
+	})
 })
