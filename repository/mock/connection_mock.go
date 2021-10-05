@@ -86,11 +86,12 @@ func (mr *MockHabitRepositoryMockRecorder) AddNewHabitRepository(userId, name, d
 }
 
 // DeleteHabitRepository mocks base method.
-func (m *MockHabitRepository) DeleteHabitRepository(userId, habitId string) error {
+func (m *MockHabitRepository) DeleteHabitRepository(userId, habitId string) (bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteHabitRepository", userId, habitId)
-	ret0, _ := ret[0].(error)
-	return ret0
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // DeleteHabitRepository indicates an expected call of DeleteHabitRepository.
