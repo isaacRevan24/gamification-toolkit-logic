@@ -56,8 +56,8 @@ func (*habitHandler) DeleteHabit(context *gin.Context) {
 
 	habitId := context.Param("id")
 	userId := context.Param("user")
-	Logs.LogDebug(habitId)
-	Logs.LogDebug(userId)
+	Logs.LogDebug("Habit id: " + habitId)
+	Logs.LogDebug("user id: " + userId)
 
 	var response model.DeleteHabitResponse
 
@@ -66,6 +66,7 @@ func (*habitHandler) DeleteHabit(context *gin.Context) {
 	if controllerError != nil {
 		response.Status = mapper.StatusBuilder(model.BAD_REQUEST_ERROR_STATUS, "Error deleting habit.")
 		Logs.LogError(controllerError)
+		Logs.LogDebug("End " + functionName)
 		context.JSON(http.StatusInternalServerError, response)
 		return
 	}
