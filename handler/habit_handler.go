@@ -61,7 +61,7 @@ func (*habitHandler) DeleteHabit(context *gin.Context) {
 
 	var response model.DeleteHabitResponse
 
-	controllerError := habitRepository.DeleteHabitRepository(userId, habitId)
+	isDeleted, controllerError := habitRepository.DeleteHabitRepository(userId, habitId)
 
 	if controllerError != nil {
 		response.Status = mapper.StatusBuilder(model.BAD_REQUEST_ERROR_STATUS, "Error deleting habit.")
@@ -70,7 +70,16 @@ func (*habitHandler) DeleteHabit(context *gin.Context) {
 		return
 	}
 
-	response.Status = mapper.StatusBuilder(model.SUCCESS_CODE_STATUS, "Habit deleted.")
-	Logs.LogDebug("End " + functionName)
-	context.JSON(http.StatusOK, response)
+	if isDeleted {
+		response.Status = mapper.StatusBuilder(model.SUCCESS_CODE_STATUS, "Habit deleted.")
+		Logs.LogDebug("End " + functionName)
+		context.JSON(http.StatusOK, response)
+		return
+	} else {
+		response.Status = mapper.StatusBuilder(model.BAD_REQUEST_ERROR_STATUS, "Habit already deleted.")
+		Logs.LogDebug("End " + functionName)
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
 }
