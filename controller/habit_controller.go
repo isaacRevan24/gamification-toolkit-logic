@@ -29,19 +29,19 @@ func (*habitController) AddNewHabit(reques model.AddNewHabitRequest) (int, error
 	return habitId, nil
 }
 
-func (*habitController) DeleteHabit(userId string, habitId string) error {
+func (*habitController) DeleteHabit(userId string, habitId string) (bool, error) {
 	const functionName string = "DeleteHabit"
 	Logs.LogDebug("Start " + functionName)
 
-	err := habitRepository.DeleteHabitRepository(userId, habitId)
+	response, err := habitRepository.DeleteHabitRepository(userId, habitId)
 
 	if err != nil {
 		Logs.LogDebug("End " + functionName)
-		return err
+		return false, err
 	}
 
 	Logs.LogDebug("End " + functionName)
-	return nil
+	return response, nil
 }
 
 func validateHabitCondition(condition string) error {
