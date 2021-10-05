@@ -18,7 +18,7 @@ type UserControllerInterface interface {
 }
 type HabitControllerInterface interface {
 	AddNewHabit(reques model.AddNewHabitRequest) (int, error)
-	DeleteHabit(userId string, habitId string) error
+	DeleteHabit(userId string, habitId string) (bool, error)
 }
 
 type userController struct{}
