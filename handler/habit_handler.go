@@ -84,3 +84,8 @@ func (*habitHandler) DeleteHabit(context *gin.Context) {
 	}
 
 }
+
+func (*habitHandler) CheckHabit(context *gin.Context) {
+
+	context.JSON(http.StatusOK, gin.H{"chech habit": "ok"})
+}

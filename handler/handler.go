@@ -24,6 +24,7 @@ type UserHandlerInterface interface {
 type HabitHandlerInterface interface {
 	AddHabit(context *gin.Context)
 	DeleteHabit(context *gin.Context)
+	CheckHabit(context *gin.Context)
 }
 
 type userHandler struct{}
