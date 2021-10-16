@@ -81,6 +81,18 @@ func (mr *MockHabitHandlerInterfaceMockRecorder) AddHabit(context interface{}) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddHabit", reflect.TypeOf((*MockHabitHandlerInterface)(nil).AddHabit), context)
 }
 
+// CheckHabit mocks base method.
+func (m *MockHabitHandlerInterface) CheckHabit(context *gin.Context) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "CheckHabit", context)
+}
+
+// CheckHabit indicates an expected call of CheckHabit.
+func (mr *MockHabitHandlerInterfaceMockRecorder) CheckHabit(context interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckHabit", reflect.TypeOf((*MockHabitHandlerInterface)(nil).CheckHabit), context)
+}
+
 // DeleteHabit mocks base method.
 func (m *MockHabitHandlerInterface) DeleteHabit(context *gin.Context) {
 	m.ctrl.T.Helper()
