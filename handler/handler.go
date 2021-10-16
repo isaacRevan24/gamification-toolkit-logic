@@ -2,7 +2,6 @@
 package handler
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -98,7 +97,6 @@ func (*habitHandler) AddHabit(context *gin.Context) {
 		Logs.LogError(controllerError)
 		context.JSON(http.StatusBadRequest, response)
 		return
-
 	} else if controllerError != nil {
 
 		response.Status = mapper.StatusBuilder(model.BAD_REQUEST_ERROR_STATUS, "Error creating new habit.")
@@ -148,17 +146,15 @@ func (*habitHandler) DeleteHabit(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, response)
 		return
 	}
-
 }
 
 func (*habitHandler) CheckHabit(context *gin.Context) {
 	var headers model.CheckHabitHeaders
 
 	if err := context.ShouldBindHeader(&headers); err != nil {
-		context.JSON(200, err)
+		context.JSON(http.StatusBadRequest, err)
+		return
 	}
-
-	fmt.Println(headers)
 
 	context.JSON(http.StatusOK, gin.H{"chech habit": "ok"})
 }

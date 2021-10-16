@@ -2,6 +2,8 @@
 package controller
 
 import (
+	"time"
+
 	"github.com/isaacRevan24/gamification-toolkit-logic/model"
 	"github.com/isaacRevan24/gamification-toolkit-logic/repository"
 	"github.com/isaacRevan24/gamification-toolkit-logic/utility"
@@ -17,6 +19,7 @@ type UserControllerInterface interface {
 	SignUp(request model.SignUpRequest) error
 }
 type HabitControllerInterface interface {
+	CheckHabit(userId string, habitId int, date time.Time) (string, error)
 	AddNewHabit(reques model.AddNewHabitRequest) (int, error)
 	DeleteHabit(userId string, habitId string) (bool, error)
 }
@@ -90,6 +93,13 @@ func (*habitController) DeleteHabit(userId string, habitId string) (bool, error)
 
 	Logs.LogDebug("End " + functionName)
 	return response, nil
+}
+
+func (*habitController) CheckHabit(userId string, habitId int, date time.Time) (string, error) {
+	const functionName string = "DeleteHabit"
+	Logs.LogDebug("Start " + functionName)
+	Logs.LogDebug("End " + functionName)
+	return "flaskdjfljfd", nil
 }
 
 func validateHabitCondition(condition string) error {
