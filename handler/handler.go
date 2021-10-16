@@ -34,6 +34,7 @@ type habitHandler struct{}
 func NewHabitHandler() HabitHandlerInterface {
 	return &habitHandler{}
 }
+
 func NewUserHandler() UserHandlerInterface {
 	return &userHandler{}
 }

@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -86,6 +87,13 @@ func (*habitHandler) DeleteHabit(context *gin.Context) {
 }
 
 func (*habitHandler) CheckHabit(context *gin.Context) {
+	var headers model.CheckHabitHeaders
+
+	if err := context.ShouldBindHeader(&headers); err != nil {
+		context.JSON(200, err)
+	}
+
+	fmt.Println(headers)
 
 	context.JSON(http.StatusOK, gin.H{"chech habit": "ok"})
 }

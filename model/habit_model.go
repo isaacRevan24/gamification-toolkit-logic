@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type AddNewHabitRequest struct {
 	UserId      string `json:"user-id" binding:"required"`
 	Name        string `json:"name" binding:"required"`
@@ -15,4 +17,11 @@ type AddNewHabitResponse struct {
 
 type DeleteHabitResponse struct {
 	Status StatusResponse `json:"status"`
+}
+
+type CheckHabitHeaders struct {
+	UserId  string `header:"user-id"`
+	HabitId int    `header:"habit-id"`
+	// Time format time.RFC3339
+	Date time.Time `header:"date" time_format:"2006-01-02T15:04:05Z07:00"`
 }
